@@ -8,19 +8,49 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
+    <!-- 
 	<jdbc:embedded-database id="dataSource" type="H2">
         <jdbc:script location="classpath:schema.sql"/>
         <jdbc:script location="classpath:test-data.sql"/>
     </jdbc:embedded-database>
+    -->
     
+     <context:property-placeholder location="jdbc.properties" />
+     
+     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+        destroy-method="close">
+        <property name="driverClassName">
+            <value>${jdbc.driverClassName}</value>
+        </property>
+        <property name="url">
+            <value>${jdbc.url}</value>
+        </property>
+        <property name="username">
+            <value>${jdbc.username}</value>
+        </property>
+        <property name="password">
+            <value>${jdbc.password}</value>
+        </property>
+    </bean>
+    
+    <!-- 
     <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>    
+    </bean>
+    -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>   
     
 	<tx:annotation-driven/>
 
+<!-- Inform Spring to scan the annotation within codes for DI requirements -->
+	<!-- 
+	<context:annotation-config/>
+	-->
 	<context:component-scan base-package="com.apress.prospring3.ch9" />
 
+    <!-- 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="com.apress.prospring3.ch9.domain"/>
@@ -34,5 +64,25 @@
             </props>
         </property>        
     </bean>
-
+    -->
+    
+    <!-- Hibernate version 4.x configuration -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.apress.prospring3.ch9.domain"/>
+        <property name="hibernateProperties">
+            <value>
+            			hibernate.dialect=org.hibernate.dialect.MySQLDialect
+                        hibernate.query.substitutions=true 'Y', false 'N'
+                        hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory
+                        hibernate.cache.use_query_cache=true
+                        hibernate.cache.use_second_level_cache=true
+                        hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider
+                        hibernate.max_fetch_depth=3
+                        hibernate.jdbc.fetch_size=50
+                        hibernate.jdbc.batch_size=10
+                        hibernate.show_sql=true
+            </value>
+        </property>        
+    </bean>
 </beans>

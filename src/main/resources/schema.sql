@@ -1,42 +1,42 @@
-DROP TABLE IF EXISTS CONTACT_HOBBY_DETAIL;
-DROP TABLE IF EXISTS CONTACT_TEL_DETAIL;
-DROP TABLE IF EXISTS HOBBY;
-DROP TABLE IF EXISTS CONTACT;
+drop table if exists contact_hobby_detail;
+drop table if exists contact_tel_detail;
+drop table if exists hobby;
+drop table if exists contact;
 
-CREATE TABLE CONTACT (
-       ID INT NOT NULL AUTO_INCREMENT
-     , FIRST_NAME VARCHAR(60) NOT NULL
-     , LAST_NAME VARCHAR(40) NOT NULL
-     , BIRTH_DATE DATE
-     , VERSION INT NOT NULL DEFAULT 0
-     , UNIQUE UQ_CONTACT_1 (FIRST_NAME, LAST_NAME)
-     , PRIMARY KEY (ID)
+create table contact (
+       id int not null auto_increment
+     , first_name varchar(60) not null
+     , last_name varchar(40) not null
+     , birth_date date
+     , version int not null default 0
+     , unique uq_contact_1 (first_name, last_name)
+     , primary key (id)
 );
 
-CREATE TABLE HOBBY (
-       HOBBY_ID VARCHAR(20) NOT NULL
-     , PRIMARY KEY (HOBBY_ID)
+create table hobby (
+       hobby_id varchar(20) not null
+     , primary key (hobby_id)
 );
 
-CREATE TABLE CONTACT_TEL_DETAIL (
-       ID INT NOT NULL AUTO_INCREMENT
-     , CONTACT_ID INT NOT NULL
-     , TEL_TYPE VARCHAR(20) NOT NULL
-     , TEL_NUMBER VARCHAR(20) NOT NULL
-     , VERSION INT NOT NULL DEFAULT 0
-     , UNIQUE UQ_CONTACT_TEL_DETAIL_1 (CONTACT_ID, TEL_TYPE)
-     , PRIMARY KEY (ID)
-     , CONSTRAINT FK_CONTACT_TEL_DETAIL_1 FOREIGN KEY (CONTACT_ID)
-                  REFERENCES CONTACT (ID)
+create table contact_tel_detail (
+       id int not null auto_increment
+     , contact_id int not null
+     , tel_type varchar(20) not null
+     , tel_number varchar(20) not null
+     , version int not null default 0
+     , unique uq_contact_tel_detail_1 (contact_id, tel_type)
+     , primary key (id)
+     , constraint fk_contact_tel_detail_1 foreign key (contact_id)
+                  references contact (id)
 );
 
-CREATE TABLE CONTACT_HOBBY_DETAIL (
-       CONTACT_ID INT NOT NULL
-     , HOBBY_ID VARCHAR(20) NOT NULL
-     , PRIMARY KEY (CONTACT_ID, HOBBY_ID)
-     , CONSTRAINT FK_CONTACT_HOBBY_DETAIL_1 FOREIGN KEY (CONTACT_ID)
-                  REFERENCES CONTACT (ID) ON DELETE CASCADE
-     , CONSTRAINT FK_CONTACT_HOBBY_DETAIL_2 FOREIGN KEY (HOBBY_ID)
-                  REFERENCES HOBBY (HOBBY_ID)
+create table contact_hobby_detail (
+       contact_id int not null
+     , hobby_id varchar(20) not null
+     , primary key (contact_id, hobby_id)
+     , constraint fk_contact_hobby_detail_1 foreign key (contact_id)
+                  references contact (id) on delete cascade
+     , constraint fk_contact_hobby_detail_2 foreign key (hobby_id)
+                  references hobby (hobby_id)
 );
 

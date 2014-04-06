@@ -67,7 +67,7 @@ public class Contact implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "ID")
+	@Column(name = "id")
 	public Long getId() {
 		return this.id;
 	}
@@ -77,7 +77,7 @@ public class Contact implements Serializable {
 	}
 
 	@Version
-	@Column(name = "VERSION")
+	@Column(name = "version")
 	public int getVersion() {
 		return this.version;
 	}
@@ -86,7 +86,7 @@ public class Contact implements Serializable {
 		this.version = version;
 	}
 
-	@Column(name = "FIRST_NAME")
+	@Column(name = "first_name")
 	public String getFirstName() {
 		return this.firstName;
 	}
@@ -95,7 +95,7 @@ public class Contact implements Serializable {
 		this.firstName = firstName;
 	}
 
-	@Column(name = "LAST_NAME")
+	@Column(name = "last_name")
 	public String getLastName() {
 		return this.lastName;
 	}
@@ -105,7 +105,7 @@ public class Contact implements Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "BIRTH_DATE")
+	@Column(name = "birth_date")
 	public Date getBirthDate() {
 		return this.birthDate;
 	}
@@ -116,8 +116,8 @@ public class Contact implements Serializable {
 
 	@ManyToMany
 	@JoinTable(name = "contact_hobby_detail", 
-	      joinColumns = @JoinColumn(name = "CONTACT_ID"), 
-	      inverseJoinColumns = @JoinColumn(name = "HOBBY_ID"))
+	      joinColumns = @JoinColumn(name = "contact_id"), 
+	      inverseJoinColumns = @JoinColumn(name = "hobby_id"))
 	public Set<Hobby> getHobbies() {
 		return this.hobbies;
 	}

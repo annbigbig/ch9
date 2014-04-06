@@ -40,7 +40,7 @@ public class ContactTelDetail implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "ID")
+	@Column(name = "id")
 	public Long getId() {
 		return this.id;
 	}
@@ -50,7 +50,7 @@ public class ContactTelDetail implements Serializable {
 	}
 
 	@Version
-	@Column(name = "VERSION")
+	@Column(name = "version")
 	public int getVersion() {
 		return this.version;
 	}
@@ -60,7 +60,7 @@ public class ContactTelDetail implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "CONTACT_ID")
+	@JoinColumn(name = "contact_id")
 	public Contact getContact() {
 		return this.contact;
 	}
@@ -69,7 +69,7 @@ public class ContactTelDetail implements Serializable {
 		this.contact = contact;
 	}
 
-	@Column(name = "TEL_TYPE")
+	@Column(name = "tel_type")
 	public String getTelType() {
 		return this.telType;
 	}
@@ -78,7 +78,7 @@ public class ContactTelDetail implements Serializable {
 		this.telType = telType;
 	}
 
-	@Column(name = "TEL_NUMBER")
+	@Column(name = "tel_number")
 	public String getTelNumber() {
 		return this.telNumber;
 	}

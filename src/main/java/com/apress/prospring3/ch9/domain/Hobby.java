@@ -39,7 +39,7 @@ public class Hobby implements Serializable {
 	}
 
 	@Id
-	@Column(name = "HOBBY_ID")
+	@Column(name = "hobby_id")
 	public String getHobbyId() {
 		return this.hobbyId;
 	}

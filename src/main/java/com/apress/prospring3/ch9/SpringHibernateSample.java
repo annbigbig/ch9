@@ -23,7 +23,8 @@ public class SpringHibernateSample {
 	public static void main(String[] args) {
 		
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
-		ctx.load("classpath:app-context.xml");
+		//ctx.load("classpath:app-context.xml");
+		ctx.load("classpath:kashu/applicationContext.xml");
 		ctx.refresh();
 		
 		ContactDao contactDao = ctx.getBean("contactDao", ContactDao.class);
@@ -33,6 +34,7 @@ public class SpringHibernateSample {
 		listContacts(contacts);	
 		
 		// List contacts with details
+		/*
 		contacts = contactDao.findAllWithDetail();
 		listContactsWithDetail(contacts);
 		
@@ -76,7 +78,8 @@ public class SpringHibernateSample {
 		contact = contactDao.findById(1l);
 		contactDao.delete(contact);
 		contacts = contactDao.findAllWithDetail();
-		listContactsWithDetail(contacts);	
+		listContactsWithDetail(contacts);
+		*/	
 		
 	}
 	
