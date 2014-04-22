@@ -50,7 +50,7 @@ public class Contact implements Serializable {
 
 	public Contact() {
 	}
-
+	
 	public Contact(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;

@@ -3,6 +3,7 @@
  */
 package com.apress.prospring3.ch9;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -28,13 +29,13 @@ public class SpringHibernateSample {
 		ctx.refresh();
 		
 		ContactDao contactDao = ctx.getBean("contactDao", ContactDao.class);
-
+		
 		// List contacts without details
 		List<Contact> contacts = contactDao.findAll();
-		listContacts(contacts);	
+		//listContacts(contacts);	
 		
-		// List contacts with details
 		/*
+		// List contacts with details
 		contacts = contactDao.findAllWithDetail();
 		listContactsWithDetail(contacts);
 		
@@ -43,10 +44,16 @@ public class SpringHibernateSample {
 		// Find contact by ID
 		contact = contactDao.findById(1l);
 		System.out.println("");
-		System.out.println("Contact with id 1:" + contact);
+		//System.out.println("Contact with id 1:" + contact);
+		List<Contact> contacts = new ArrayList<Contact>();
+		contacts.add(contact);
+		listContactsWithDetail(contacts);
 		System.out.println("");		
+		*/
 		
 		// Add new contact
+		/*
+		Contact contact;
 		contact = new Contact();
 		contact.setFirstName("Michael");
 		contact.setLastName("Jackson");
@@ -58,9 +65,11 @@ public class SpringHibernateSample {
 		contactDao.save(contact);
 		contacts = contactDao.findAllWithDetail();
 		listContactsWithDetail(contacts);
-
+		*/
+		
 		// Update contact
-		contact = contactDao.findById(1l);
+		/*
+		Contact contact = contactDao.findById(4l);
 		contact.setFirstName("Kim Fung");
 		Set<ContactTelDetail> contactTels = contact.getContactTelDetails();
 		ContactTelDetail toDeleteContactTel = null;
@@ -73,13 +82,14 @@ public class SpringHibernateSample {
 		contactDao.save(contact);
 		contacts = contactDao.findAllWithDetail();
 		listContactsWithDetail(contacts);
+		*/
 		
 		// Delete contact
-		contact = contactDao.findById(1l);
+		Contact contact = contactDao.findById(4l);
 		contactDao.delete(contact);
 		contacts = contactDao.findAllWithDetail();
 		listContactsWithDetail(contacts);
-		*/	
+		
 		
 	}
 	
